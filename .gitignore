@@ -2,3 +2,4 @@ node_modules
 *.log
 lib
 coverage
+.DS_Store

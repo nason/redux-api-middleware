@@ -1,0 +1,1739 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset='utf-8' />
+  <title>redux-api-middleware 2.0.0-beta.1 | Documentation</title>
+  <meta name='viewport' content='width=device-width,initial-scale=1'>
+  <link href='assets/bass.css' type='text/css' rel='stylesheet' />
+  <link href='assets/style.css' type='text/css' rel='stylesheet' />
+  <link href='assets/github.css' type='text/css' rel='stylesheet' />
+</head>
+<body class='documentation'>
+  <div class='max-width-4 mx-auto'>
+    <div class='clearfix md-mxn2'>
+      <div class='fixed xs-hide fix-3 overflow-auto max-height-100'>
+        <div class='py1 px2'>
+          <h3 class='mb0 no-anchor'>redux-api-middleware</h3>
+          <div class='mb1'><code>2.0.0-beta.1</code></div>
+          <input
+            placeholder='Filter'
+            id='filter-input'
+            class='col12 block input'
+            type='text' />
+          <div id='toc'>
+            <ul class='list-reset h5 py1-ul'>
+              
+                
+                <li><a
+                  href='#readme'
+                  class="h5 bold black caps">
+                  Readme
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#usage'
+                  class="h5 bold black caps">
+                  Usage
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#reference'
+                  class="h5 bold black caps">
+                  Reference
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#rsaa-spec'
+                  class="h5 bold black caps">
+                  RSAA Spec
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#reduxactionhandler'
+                  class="">
+                  ReduxActionHandler
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#redux-api-middleware'
+                  class="">
+                  redux-api-middleware
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#rsaa'
+                  class="">
+                  RSAA
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#isrsaa'
+                  class="">
+                  isRSAA
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#validatersaa'
+                  class="">
+                  validateRSAA
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#isvalidrsaa'
+                  class="">
+                  isValidRSAA
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#invalidrsaa'
+                  class="">
+                  InvalidRSAA
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#internalerror'
+                  class="">
+                  InternalError
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#requesterror'
+                  class="">
+                  RequestError
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#apierror'
+                  class="">
+                  ApiError
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#getjson'
+                  class="">
+                  getJSON
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#apimiddleware'
+                  class="">
+                  apiMiddleware
+                  
+                </a>
+                
+                </li>
+              
+            </ul>
+          </div>
+          <div class='mt1 h6 quiet'>
+            <a href='http://documentation.js.org/reading-documentation.html'>Need help reading this?</a>
+          </div>
+        </div>
+      </div>
+      <div class='fix-margin-3'>
+        
+          
+            <div class='keyline-top-not py2'><section class='py2 clearfix'>
+
+  <h2 id='readme' class='mt0'>
+    Readme
+  </h2>
+
+  
+    <h2>This <code>next</code> branch is 2.0.0-beta in development!</h2>
+<p>See <a href="#upgrading-from-v1.0.x">Upgrading from v1.0.x</a> for details on upgrading, and issues for the <a href="https://github.com/agraboso/redux-api-middleware/issues?utf8=%E2%9C%93&#x26;q=milestone%253A2.0.0%20">2.0 milestone here</a></p>
+<p><a href="https://travis-ci.org/agraboso/redux-api-middleware"><img src="https://travis-ci.org/agraboso/redux-api-middleware.svg?branch=next" alt="Build Status"></a> <a href="https://coveralls.io/github/agraboso/redux-api-middleware?branch=next"><img src="https://coveralls.io/repos/agraboso/redux-api-middleware/badge.svg?branch=next&#x26;service=github" alt="Coverage Status"></a></p>
+<p><a href="http://rackt.github.io/redux/docs/advanced/Middleware.html">Redux middleware</a> for calling an API.</p>
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+<ul>
+<li>
+<p><a href="#introduction">Introduction</a></p>
+<ul>
+<li><a href="#a-simple-example">A simple example</a></li>
+<li><a href="#usage">Usage</a></li>
+</ul>
+</li>
+<li>
+<p><a href="#installation">Installation</a></p>
+<ul>
+<li><a href="#configurestorejs">configureStore.js</a></li>
+<li><a href="#appjs">app.js</a></li>
+</ul>
+</li>
+<li><a href="#documentation-and-reference">Documentation and Reference</a></li>
+<li><a href="#history">History</a></li>
+<li><a href="#tests">Tests</a></li>
+<li><a href="#upgrading-from-v10x">Upgrading from v1.0.x</a></li>
+<li><a href="#license">License</a></li>
+<li><a href="#projects-using-redux-api-middleware">Projects using redux-api-middleware</a></li>
+<li><a href="#acknowledgments">Acknowledgments</a></li>
+</ul>
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+<h2>Introduction</h2>
+<p>This middleware receives <a href="REFERENCE.md#redux-standard-api-calling-actions"><em>Redux Standard API-calling Actions</em></a> (RSAAs) and dispatches <a href="REFERENCE.md#flux-standard-actions"><em>Flux Standard Actions</em></a> (FSAs) to the next middleware.</p>
+<p>RSAAs are identified by the presence of an <code>[RSAA]</code> property, where <a href="REFERENCE.md#rsaa"><code>RSAA</code></a> is a <code>String</code> constant defined in, and exported by <code>redux-api-middleware</code>. They contain information describing an API call and three different types of FSAs, known as the <em>request</em>, <em>success</em> and <em>failure</em> FSAs.</p>
+<h3>A simple example</h3>
+<p>The following is a minimal RSAA action:</p>
+<pre class='hljs'><span class="hljs-keyword">import</span> { RSAA } <span class="hljs-keyword">from</span> <span class="hljs-string">`redux-api-middleware`</span>; <span class="hljs-comment">// RSAA = '@@redux-api-middleware/RSAA'</span>
+
+{
+  [RSAA]: {
+    <span class="hljs-attr">endpoint</span>: <span class="hljs-string">'http://www.example.com/api/users'</span>,
+    <span class="hljs-attr">method</span>: <span class="hljs-string">'GET'</span>,
+    <span class="hljs-attr">types</span>: [<span class="hljs-string">'REQUEST'</span>, <span class="hljs-string">'SUCCESS'</span>, <span class="hljs-string">'FAILURE'</span>]
+  }
+}</pre>
+<p>Upon receiving this action, <code>redux-api-middleware</code> will</p>
+<ol>
+<li>
+<p>check that it is indeed a valid RSAA action;</p>
+</li>
+<li>
+<p>dispatch the following <em>request</em> FSA to the next middleware;</p>
+<pre class='hljs'>{
+  <span class="hljs-attr">type</span>: <span class="hljs-string">'REQUEST'</span>
+}</pre>
+</li>
+<li>
+<p>make a GET request to <code>http://www.example.com/api/users</code>;</p>
+</li>
+<li>
+<p>if the request is successful, dispatch the following <em>success</em> FSA to the next middleware;</p>
+<pre class='hljs'>{
+  <span class="hljs-attr">type</span>: <span class="hljs-string">'SUCCESS'</span>,
+  <span class="hljs-attr">payload</span>: {
+    <span class="hljs-attr">users</span>: [
+      { <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'John Doe'</span> },
+      { <span class="hljs-attr">id</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Jane Doe'</span> },
+    ]
+  }
+}</pre>
+</li>
+<li>
+<p>if the request is unsuccessful, dispatch the following <em>failure</em> FSA to the next middleware.</p>
+<pre class='hljs'>{
+  <span class="hljs-attr">type</span>: <span class="hljs-string">'FAILURE'</span>,
+  <span class="hljs-attr">payload</span>: error <span class="hljs-comment">// An ApiError object</span>
+  error: <span class="hljs-literal">true</span>
+}</pre>
+</li>
+</ol>
+<p>We have tiptoed around error-handling issues here. For a thorough walkthrough of the <code>redux-api-middleware</code> lifecycle, see <a href="USAGE.md#lifecycle">Lifecycle</a> below.</p>
+<h3>Usage</h3>
+<p>See <a href="USAGE.md">Usage</a> for more documentation</p>
+<h2>Installation</h2>
+<p><code>redux-api-middleware</code> is available on <a href="https://www.npmjs.com/package/redux-api-middleware">npm</a>.</p>
+<pre><code>$ npm install redux-api-middleware --save
+</code></pre>
+<p>To use it, wrap the standard Redux store with it. Here is an example setup. For more information (for example, on how to add several middlewares), consult the <a href="http://redux.js.org">Redux documentation</a>.</p>
+<p>Note: <code>redux-api-middleware</code> depends on a <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">global Fetch</a> being available, and may require a polyfill for your runtime environment(s).</p>
+<h4>configureStore.js</h4>
+<pre class='hljs'><span class="hljs-keyword">import</span> { createStore, applyMiddleware, combineReducers } <span class="hljs-keyword">from</span> <span class="hljs-string">'redux'</span>;
+<span class="hljs-keyword">import</span> { apiMiddleware } <span class="hljs-keyword">from</span> <span class="hljs-string">'redux-api-middleware'</span>;
+<span class="hljs-keyword">import</span> reducers <span class="hljs-keyword">from</span> <span class="hljs-string">'./reducers'</span>;
+
+<span class="hljs-keyword">const</span> reducer = combineReducers(reducers);
+<span class="hljs-keyword">const</span> createStoreWithMiddleware = applyMiddleware(apiMiddleware)(createStore);
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">configureStore</span>(<span class="hljs-params">initialState</span>) </span>{
+  <span class="hljs-keyword">return</span> createStoreWithMiddleware(reducer, initialState);
+}</pre>
+<h4>app.js</h4>
+<pre class='hljs'><span class="hljs-keyword">const</span> store = configureStore(initialState);</pre>
+<h2>Documentation and Reference</h2>
+<p>// TODO set this up!
+Documentation is available at <a href="https://redux-api-middleware.js.org">https://redux-api-middleware.js.org</a></p>
+<h2>History</h2>
+<p>// TODO set this up!
+See <a href="CHANGELOG.md">CHANGELOG.md</a></p>
+<h2>Tests</h2>
+<pre><code>$ npm install &#x26;&#x26; npm test
+</code></pre>
+<h2>Upgrading from v1.0.x</h2>
+<ul>
+<li>The <code>CALL_API</code> symbol is replaced with the <code>RSAA</code> string as the top-level RSAA action key. <code>CALL_API</code> is aliased to the new value as of 2.0, but this will ultimately be deprecated.</li>
+<li><code>redux-api-middleware</code> no longer brings its own <code>fetch</code> implementation and depends on a global <code>fetch</code> to be provided in the runtime</li>
+<li>A new <code>options</code> config is added to pass your <code>fetch</code> implementation extra options other than <code>method</code>, <code>headers</code>, <code>body</code> and <code>credentials</code></li>
+</ul>
+<h2>License</h2>
+<p>MIT. See <a href="LICENSE.md">LICENSE.md</a></p>
+<h2>Projects using redux-api-middleware</h2>
+<ul>
+<li><a href="https://github.com/barrystaes/react-trebuchet/tree/test-bottledapi-apireduxmiddleware">react-trebuchet</a> (experimental/opinionated fork of react-slingshot for SPA frontends using REST JSON API backends)</li>
+</ul>
+<p>If your opensource project uses (or works with) <code>redux-api-middleware</code> we would be happy to list it here!</p>
+<h2>Acknowledgments</h2>
+<p>The code in this module was originally extracted from the <a href="https://github.com/rackt/redux/blob/master/examples/real-world/middleware/api.js">real-world</a> example in the <a href="https://github.com/rackt/redux">redux</a> repository, due to <a href="https://github.com/gaearon">Dan Abramov</a>. It has evolved thanks to issues filed by, and pull requests contributed by, other developers.</p>
+
+  
+</section>
+</div>
+          
+        
+          
+            <div class='keyline-top-not py2'><section class='py2 clearfix'>
+
+  <h2 id='usage' class='mt0'>
+    Usage
+  </h2>
+
+  
+    <!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+<ul>
+<li>
+<p><a href="#defining-the-api-call">Defining the API call</a></p>
+<ul>
+<li><a href="#rsaaendpoint"><code>[RSAA].endpoint</code></a></li>
+<li><a href="#rsaamethod"><code>[RSAA].method</code></a></li>
+<li><a href="#rsaabody"><code>[RSAA].body</code></a></li>
+<li><a href="#rsaaheaders"><code>[RSAA].headers</code></a></li>
+<li><a href="#rsaacredentials"><code>[RSAA].credentials</code></a></li>
+</ul>
+</li>
+<li><a href="#bailing-out">Bailing out</a></li>
+<li><a href="#lifecycle">Lifecycle</a></li>
+<li>
+<p><a href="#customizing-the-dispatched-fsas">Customizing the dispatched FSAs</a></p>
+<ul>
+<li><a href="#request-type-descriptors"><em>Request</em> type descriptors</a></li>
+<li><a href="#success-type-descriptors"><em>Success</em> type descriptors</a></li>
+<li><a href="#failure-type-descriptors"><em>Failure</em> type descriptors</a></li>
+</ul>
+</li>
+</ul>
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+<h3>Defining the API call</h3>
+<p>The parameters of the API call are specified by root properties of the <code>[RSAA]</code> property of an RSAA.</p>
+<h4><code>[RSAA].endpoint</code></h4>
+<p>The URL endpoint for the API call.</p>
+<p>It is usually a string, be it a plain old one or an ES2015 template string. It may also be a function taking the state of your Redux store as its argument, and returning such a string.</p>
+<h4><code>[RSAA].method</code></h4>
+<p>The HTTP method for the API call.</p>
+<p>It must be one of the strings <code>GET</code>, <code>HEAD</code>, <code>POST</code>, <code>PUT</code>, <code>PATCH</code>, <code>DELETE</code> or <code>OPTIONS</code>, in any mixture of lowercase and uppercase letters.</p>
+<h4><code>[RSAA].body</code></h4>
+<p>The body of the API call.</p>
+<p><code>redux-api-middleware</code> uses the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API"><code>Fetch API</code></a> to make the API call. <code>[RSAA].body</code> should hence be a valid body according to the the <a href="https://fetch.spec.whatwg.org">fetch specification</a>. In most cases, this will be a JSON-encoded string or a <a href="https://developer.mozilla.org/en/docs/Web/API/FormData"><code>FormData</code></a> object.</p>
+<h4><code>[RSAA].headers</code></h4>
+<p>The HTTP headers for the API call.</p>
+<p>It is usually an object, with the keys specifying the header names and the values containing their content. For example, you can let the server know your call contains a JSON-encoded string body in the following way.</p>
+<pre class='hljs'>{
+  [RSAA]: {
+    ...
+    headers: { <span class="hljs-string">'Content-Type'</span>: <span class="hljs-string">'application/json'</span> }
+    ...
+  }
+}</pre>
+<p>It may also be a function taking the state of your Redux store as its argument, and returning an object of headers as above.</p>
+<h4><code>[RSAA].credentials</code></h4>
+<p>Whether or not to send cookies with the API call.</p>
+<p>It must be one of the following strings:</p>
+<ul>
+<li><code>omit</code> is the default, and does not send any cookies;</li>
+<li><code>same-origin</code> only sends cookies for the current domain;</li>
+<li><code>include</code> always send cookies, even for cross-origin calls.</li>
+</ul>
+<h3>Bailing out</h3>
+<p>In some cases, the data you would like to fetch from the server may already be cached in you Redux store. Or you may decide that the current user does not have the necessary permissions to make some request.</p>
+<p>You can tell <code>redux-api-middleware</code> to not make the API call through <code>[RSAA].bailout</code>. If the value is <code>true</code>, the RSAA will die here, and no FSA will be passed on to the next middleware.</p>
+<p>A more useful possibility is to give <code>[RSAA].bailout</code> a function. At runtime, it will be passed the state of your Redux store as its only argument, if the return value of the function is <code>true</code>, the API call will not be made.</p>
+<h3>Lifecycle</h3>
+<p>The <code>[RSAA].types</code> property controls the output of <code>redux-api-middleware</code>. The simplest form it can take is an array of length 3 consisting of string constants (or symbols), as in our <a href="README.md#a-simple-example">example</a> above. This results in the default behavior we now describe.</p>
+<ol>
+<li>
+<p>When <code>redux-api-middleware</code> receives an action, it first checks whether it has an <code>[RSAA]</code> property. If it does not, it was clearly not intended for processing with <code>redux-api-middleware</code>, and so it is unceremoniously passed on to the next middleware.</p>
+</li>
+<li>
+<p>It is now time to validate the action against the <a href="RSAA.md#redux-standard-api-calling-actions">RSAA definition</a>. If there are any validation errors, a <em>request</em> FSA will be dispatched (if at all possible) with the following properties:</p>
+<ul>
+<li><code>type</code>: the string constant in the first position of the <code>[RSAA].types</code> array;</li>
+<li><code>payload</code>: an <a href="REFERENCE.md#invalidrsaa"><code>InvalidRSAA</code></a> object containing a list of said validation errors;</li>
+<li><code>error: true</code>.</li>
+</ul>
+<p><code>redux-api-middleware</code> will perform no further operations. In particular, no API call will be made, and the incoming RSAA will die here.</p>
+</li>
+<li>
+<p>Now that <code>redux-api-middleware</code> is sure it has received a valid RSAA, it will try making the API call. If everything is alright, a <em>request</em> FSA will be dispatched with the following property:</p>
+</li>
+</ol>
+<ul>
+<li>
+<p><code>type</code>: the string constant in the first position of the <code>[RSAA].types</code> array.</p>
+<p>But errors may pop up at this stage, for several reasons:</p>
+</li>
+<li>
+<p><code>redux-api-middleware</code> has to call those of <code>[RSAA].bailout</code>, <code>[RSAA].endpoint</code> and <code>[RSAA].headers</code> that happen to be a function, which may throw an error;</p>
+</li>
+<li>
+<p><code>fetch</code> may throw an error: the RSAA definition is not strong enough to preclude that from happening (you may, for example, send in a <code>[RSAA].body</code> that is not valid according to the fetch specification — mind the SHOULDs in the <a href="RSAA.md#redux-standard-api-calling-actions">RSAA definition</a>);</p>
+</li>
+<li>
+<p>a network failure occurs (the network is unreachable, the server responds with an error,...).</p>
+<p>If such an error occurs, a different <em>request</em> FSA will be dispatched (<em>instead</em> of the one described above). It will contain the following properties:</p>
+</li>
+<li>
+<p><code>type</code>: the string constant in the first position of the <code>[RSAA].types</code> array;</p>
+</li>
+<li>
+<p><code>payload</code>: a <a href="REFERENCE.md#requesterror"><code>RequestError</code></a> object containing an error message;</p>
+</li>
+<li>
+<p><code>error: true</code>.</p>
+</li>
+</ul>
+<ol start="4">
+<li>If <code>redux-api-middleware</code> receives a response from the server with a status code in the 200 range, a <em>success</em> FSA will be dispatched with the following properties:</li>
+</ol>
+<ul>
+<li>
+<p><code>type</code>: the string constant in the second position of the <code>[RSAA].types</code> array;</p>
+</li>
+<li>
+<p><code>payload</code>: if the <code>Content-Type</code> header of the response is set to something JSONy (see <a href="#success-type-descriptors"><em>Success</em> type descriptors</a> below), the parsed JSON response of the server, or undefined otherwise.</p>
+<p>If the status code of the response falls outside that 200 range, a <em>failure</em> FSA will dispatched instead, with the following properties:</p>
+</li>
+<li>
+<p><code>type</code>: the string constant in the third position of the <code>[RSAA].types</code> array;</p>
+</li>
+<li>
+<p><code>payload</code>: an <a href="REFERENCE.md#apierror"><code>ApiError</code></a> object containing the message <code>`${status} - ${statusText}`</code>;</p>
+</li>
+<li>
+<p><code>error: true</code>.</p>
+</li>
+</ul>
+<h3>Customizing the dispatched FSAs</h3>
+<p>It is possible to customize the output of <code>redux-api-middleware</code> by replacing one or more of the string constants (or symbols) in <code>[RSAA].types</code> by a type descriptor.</p>
+<p>A <em>type descriptor</em> is a plain JavaScript object that will be used as a blueprint for the dispatched FSAs. As such, type descriptors must have a <code>type</code> property, intended to house the string constant or symbol specifying the <code>type</code> of the resulting FSAs.</p>
+<p>They may also have <code>payload</code> and <code>meta</code> properties, which may be of any type. Functions passed as <code>payload</code> and <code>meta</code> properties of type descriptors will be evaluated at runtime. The signature of these functions should be different depending on whether the type descriptor refers to <em>request</em>, <em>success</em> or <em>failure</em> FSAs — keep reading.</p>
+<p>If a custom <code>payload</code> and <code>meta</code> function throws an error, <code>redux-api-middleware</code> will dispatch an FSA with its <code>error</code> property set to <code>true</code>, and an <code>InternalError</code> object as its <code>payload</code>.</p>
+<p>A noteworthy feature of <code>redux-api-middleware</code> is that it accepts Promises (or function that return them) in <code>payload</code> and <code>meta</code> properties of type descriptors, and it will wait for them to resolve before dispatching the FSA — so no need to use anything like <code>redux-promise</code>.</p>
+<h4><em>Request</em> type descriptors</h4>
+<p><code>payload</code> and <code>meta</code> functions will be passed the RSAA action itself and the state of your Redux store.</p>
+<p>For example, if you want your <em>request</em> FSA to have the URL endpoint of the API call in its <code>payload</code> property, you can model your RSAA on the following.</p>
+<pre class='hljs'><span class="hljs-comment">// Input RSAA</span>
+{
+  [RSAA]: {
+    <span class="hljs-attr">endpoint</span>: <span class="hljs-string">'http://www.example.com/api/users'</span>,
+    <span class="hljs-attr">method</span>: <span class="hljs-string">'GET'</span>,
+    <span class="hljs-attr">types</span>: [
+      {
+        <span class="hljs-attr">type</span>: <span class="hljs-string">'REQUEST'</span>,
+        <span class="hljs-attr">payload</span>: <span class="hljs-function">(<span class="hljs-params">action, state</span>) =&gt;</span> ({ <span class="hljs-attr">endpoint</span>: action.endpoint })
+      },
+      <span class="hljs-string">'SUCCESS'</span>,
+      <span class="hljs-string">'FAILURE'</span>
+    ]
+  }
+}
+
+<span class="hljs-comment">// Output request FSA</span>
+{
+  <span class="hljs-attr">type</span>: <span class="hljs-string">'REQUEST'</span>,
+  <span class="hljs-attr">payload</span>: { <span class="hljs-attr">endpoint</span>: <span class="hljs-string">'http://www.example.com/api/users'</span> }
+}</pre>
+<p>If you do not need access to the action itself or the state of your Redux store, you may as well just use a static object. For example, if you want the <code>meta</code> property to contain a fixed message saying where in your application you're making the request, you can do this.</p>
+<pre class='hljs'><span class="hljs-comment">// Input RSAA</span>
+{
+  [RSAA]: {
+    <span class="hljs-attr">endpoint</span>: <span class="hljs-string">'http://www.example.com/api/users'</span>,
+    <span class="hljs-attr">method</span>: <span class="hljs-string">'GET'</span>,
+    <span class="hljs-attr">types</span>: [
+      {
+        <span class="hljs-attr">type</span>: <span class="hljs-string">'REQUEST'</span>,
+        <span class="hljs-attr">meta</span>: { <span class="hljs-attr">source</span>: <span class="hljs-string">'userList'</span> }
+      },
+      <span class="hljs-string">'SUCCESS'</span>,
+      <span class="hljs-string">'FAILURE'</span>
+    ]
+  }
+}
+
+<span class="hljs-comment">// Output request FSA</span>
+{
+  <span class="hljs-attr">type</span>: <span class="hljs-string">'REQUEST'</span>,
+  <span class="hljs-attr">meta</span>: { <span class="hljs-attr">source</span>: <span class="hljs-string">'userList'</span> }
+}</pre>
+<p>By default, <em>request</em> FSAs will not contain <code>payload</code> and <code>meta</code> properties.</p>
+<p>Error <em>request</em> FSAs might need to obviate these custom settings though.</p>
+<ul>
+<li><em>Request</em> FSAs resulting from invalid RSAAs (step 2 in <a href="#lifecycle">Lifecycle</a> above) cannot be customized. <code>redux-api-middleware</code> will try to dispatch an error <em>request</em> FSA, but it might not be able to (it may happen that the invalid RSAA does not contain a value that can be used as the <em>request</em> FSA <code>type</code> property, in which case <code>redux-api-middleware</code> will let the RSAA die silently).</li>
+<li><em>Request</em> FSAs resulting in request errors (step 3 in <a href="#lifecycle">Lifecycle</a> above) will honor the user-provided <code>meta</code>, but will ignore the user-provided <code>payload</code>, which is reserved for the default error object.</li>
+</ul>
+<h4><em>Success</em> type descriptors</h4>
+<p><code>payload</code> and <code>meta</code> functions will be passed the RSAA action itself, the state of your Redux store, and the raw server response.</p>
+<p>For example, if you want to process the JSON response of the server using <a href="https://github.com/gaearon/normalizr"><code>normalizr</code></a>, you can do it as follows.</p>
+<pre class='hljs'><span class="hljs-keyword">import</span> { Schema, arrayOf, normalize } <span class="hljs-keyword">from</span> <span class="hljs-string">'normalizr'</span>;
+<span class="hljs-keyword">const</span> userSchema = <span class="hljs-keyword">new</span> Schema(<span class="hljs-string">'users'</span>);
+
+<span class="hljs-comment">// Input RSAA</span>
+{
+  [RSAA]: {
+    <span class="hljs-attr">endpoint</span>: <span class="hljs-string">'http://www.example.com/api/users'</span>,
+    <span class="hljs-attr">method</span>: <span class="hljs-string">'GET'</span>,
+    <span class="hljs-attr">types</span>: [
+      <span class="hljs-string">'REQUEST'</span>,
+      {
+        <span class="hljs-attr">type</span>: <span class="hljs-string">'SUCCESS'</span>,
+        <span class="hljs-attr">payload</span>: <span class="hljs-function">(<span class="hljs-params">action, state, res</span>) =&gt;</span> {
+          <span class="hljs-keyword">const</span> contentType = res.headers.get(<span class="hljs-string">'Content-Type'</span>);
+          <span class="hljs-keyword">if</span> (contentType &amp;&amp; ~contentType.indexOf(<span class="hljs-string">'json'</span>)) {
+            <span class="hljs-comment">// Just making sure res.json() does not raise an error</span>
+            <span class="hljs-keyword">return</span> res.json().then(<span class="hljs-function">(<span class="hljs-params">json</span>) =&gt;</span> normalize(json, { <span class="hljs-attr">users</span>: arrayOf(userSchema) }));
+          }
+        }
+      },
+      <span class="hljs-string">'FAILURE'</span>
+    ]
+  }
+}
+
+<span class="hljs-comment">// Output success FSA</span>
+{
+  <span class="hljs-attr">type</span>: <span class="hljs-string">'SUCCESS'</span>,
+  <span class="hljs-attr">payload</span>: {
+    <span class="hljs-attr">result</span>: [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>],
+    <span class="hljs-attr">entities</span>: {
+      <span class="hljs-attr">users</span>: {
+        <span class="hljs-number">1</span>: {
+          <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>,
+          <span class="hljs-attr">name</span>: <span class="hljs-string">'John Doe'</span>
+        },
+        <span class="hljs-number">2</span>: {
+          <span class="hljs-attr">id</span>: <span class="hljs-number">2</span>,
+          <span class="hljs-attr">name</span>: <span class="hljs-string">'Jane Doe'</span>
+        }
+      }
+    }
+  }
+}</pre>
+<p>The above pattern of parsing the JSON body of the server response is probably quite common, so <code>redux-api-middleware</code> exports a utility function <code>getJSON</code> which allows for the above <code>payload</code> function to be written as</p>
+<pre class='hljs'>(action, state, res) =&gt; {
+  <span class="hljs-keyword">return</span> getJSON(res).then(<span class="hljs-function">(<span class="hljs-params">json</span>) =&gt;</span> normalize(json, { <span class="hljs-attr">users</span>: arrayOf(userSchema) }));
+}</pre>
+<p>By default, <em>success</em> FSAs will not contain a <code>meta</code> property, while their <code>payload</code> property will be evaluated from</p>
+<pre class='hljs'>(action, state, res) =&gt; getJSON(res)</pre>
+<h4><em>Failure</em> type descriptors</h4>
+<p><code>payload</code> and <code>meta</code> functions will be passed the RSAA action itself, the state of your Redux store, and the raw server response — exactly as for <em>success</em> type descriptors. The <code>error</code> property of dispatched <em>failure</em> FSAs will always be set to <code>true</code>.</p>
+<p>For example, if you want the status code and status message of a unsuccessful API call in the <code>meta</code> property of your <em>failure</em> FSA, do the following.</p>
+<pre class='hljs'>{
+  [RSAA]: {
+    <span class="hljs-attr">endpoint</span>: <span class="hljs-string">'http://www.example.com/api/users/1'</span>,
+    <span class="hljs-attr">method</span>: <span class="hljs-string">'GET'</span>,
+    <span class="hljs-attr">types</span>: [
+      <span class="hljs-string">'REQUEST'</span>,
+      <span class="hljs-string">'SUCCESS'</span>,
+      {
+        <span class="hljs-attr">type</span>: <span class="hljs-string">'FAILURE'</span>,
+        <span class="hljs-attr">meta</span>: <span class="hljs-function">(<span class="hljs-params">action, state, res</span>) =&gt;</span> {
+          <span class="hljs-keyword">if</span> (res) {
+            <span class="hljs-keyword">return</span> {
+              <span class="hljs-attr">status</span>: res.status
+              statusText: res.statusText
+            };
+          } <span class="hljs-keyword">else</span> {
+            <span class="hljs-keyword">return</span> {
+              <span class="hljs-attr">status</span>: <span class="hljs-string">'Network request failed'</span>
+            }
+          }
+        }
+      }
+    ]
+  }
+}</pre>
+<p>By default, <em>failure</em> FSAs will not contain a <code>meta</code> property, while their <code>payload</code> property will be evaluated from</p>
+<pre class='hljs'>(action, state, res) =&gt;
+  getJSON(res).then(
+    <span class="hljs-function">(<span class="hljs-params">json</span>) =&gt;</span> <span class="hljs-keyword">new</span> ApiError(res.status, res.statusText, json)
+  )</pre>
+
+  
+</section>
+</div>
+          
+        
+          
+            <div class='keyline-top-not py2'><section class='py2 clearfix'>
+
+  <h2 id='reference' class='mt0'>
+    Reference
+  </h2>
+
+  
+    <!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+<ul>
+<li><a href="#rsaa"><code>RSAA</code></a></li>
+<li><a href="#apimiddleware"><code>apiMiddleware</code></a></li>
+<li><a href="#isrsaaaction"><code>isRSAA(action)</code></a></li>
+<li><a href="#validatersaaaction"><code>validateRSAA(action)</code></a></li>
+<li><a href="#isvalidrsaaaction"><code>isValidRSAA(action)</code></a></li>
+<li><a href="#invalidrsaa"><code>InvalidRSAA</code></a></li>
+<li><a href="#internalerror"><code>InternalError</code></a></li>
+<li><a href="#requesterror"><code>RequestError</code></a></li>
+<li><a href="#apierror"><code>ApiError</code></a></li>
+<li><a href="#getjsonres"><code>getJSON(res)</code></a></li>
+</ul>
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+<p>The following objects are exported by <code>redux-api-middleware</code>.</p>
+<h4><code>RSAA</code></h4>
+<p>A JavaScript <code>String</code> whose presence as a key in an action signals that <code>redux-api-middleware</code> should process said action.</p>
+<h4><code>apiMiddleware</code></h4>
+<p>The Redux middleware itself.</p>
+<h4><code>isRSAA(action)</code></h4>
+<p>A function that returns <code>true</code> if <code>action</code> has an <code>[RSAA]</code> property, and <code>false</code> otherwise.</p>
+<h4><code>validateRSAA(action)</code></h4>
+<p>A function that validates <code>action</code> against the RSAA definition, returning an array of validation errors.</p>
+<h4><code>isValidRSAA(action)</code></h4>
+<p>A function that returns <code>true</code> if <code>action</code> conforms to the RSAA definition, and <code>false</code> otherwise. Internally, it simply checks the length of the array of validation errors returned by <code>validateRSAA(action)</code>.</p>
+<h4><code>InvalidRSAA</code></h4>
+<p>An error class extending the native <code>Error</code> object. Its constructor takes an array of validation errors as its only argument.</p>
+<p><code>InvalidRSAA</code> objects have three properties:</p>
+<ul>
+<li><code>name: 'InvalidRSAA'</code>;</li>
+<li><code>validationErrors</code>: the argument of the call to its constructor; and</li>
+<li><code>message: 'Invalid RSAA'</code>.</li>
+</ul>
+<h4><code>InternalError</code></h4>
+<p>An error class extending the native <code>Error</code> object. Its constructor takes a string, intended to contain an error message.</p>
+<p><code>InternalError</code> objects have two properties:</p>
+<ul>
+<li><code>name: 'InternalError'</code>;</li>
+<li><code>message</code>: the argument of the call to its constructor.</li>
+</ul>
+<h4><code>RequestError</code></h4>
+<p>An error class extending the native <code>Error</code> object. Its constructor takes a string, intended to contain an error message.</p>
+<p><code>RequestError</code> objects have two properties:</p>
+<ul>
+<li><code>name: 'RequestError'</code>;</li>
+<li><code>message</code>: the argument of the call to its constructor.</li>
+</ul>
+<h4><code>ApiError</code></h4>
+<p>An error class extending the native <code>Error</code> object. Its constructor takes three arguments:</p>
+<ul>
+<li>a status code,</li>
+<li>a status text, and</li>
+<li>a further object, intended for a possible JSON response from the server.</li>
+</ul>
+<p><code>ApiError</code> objects have five properties:</p>
+<ul>
+<li><code>name: 'ApiError'</code>;</li>
+<li><code>status</code>: the first argument of the call to its constructor;</li>
+<li><code>statusText</code>: the second argument of the call to its constructor;</li>
+<li><code>response</code>: to the third argument of the call to its constructor; and</li>
+<li><code>message : `${status} - ${statusText}`</code>.</li>
+</ul>
+<h4><code>getJSON(res)</code></h4>
+<p>A function taking a response object as its only argument. If the response object contains a JSONy <code>Content-Type</code>, it returns a promise resolving to its JSON body. Otherwise, it returns a promise resolving to undefined.</p>
+
+  
+</section>
+</div>
+          
+        
+          
+            <div class='keyline-top-not py2'><section class='py2 clearfix'>
+
+  <h2 id='rsaa-spec' class='mt0'>
+    RSAA Spec
+  </h2>
+
+  
+    <!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+<ul>
+<li>
+<p><a href="#redux-standard-api-calling-actions">Redux Standard API-calling Actions</a></p>
+<ul>
+<li><a href="#rsaa"><code>[RSAA]</code></a></li>
+<li><a href="#rsaaendpoint"><code>[RSAA].endpoint</code></a></li>
+<li><a href="#rsaamethod"><code>[RSAA].method</code></a></li>
+<li><a href="#rsaabody"><code>[RSAA].body</code></a></li>
+<li><a href="#rsaaheaders"><code>[RSAA].headers</code></a></li>
+<li><a href="#rsaacredentials"><code>[RSAA].credentials</code></a></li>
+<li><a href="#rsaabailout"><code>[RSAA].bailout</code></a></li>
+<li><a href="#rsaatypes"><code>[RSAA].types</code></a></li>
+<li><a href="#type-descriptors">Type descriptors</a></li>
+</ul>
+</li>
+<li>
+<p><a href="#flux-standard-actions">Flux Standard Actions</a></p>
+<ul>
+<li><a href="#type"><code>type</code></a></li>
+<li><a href="#payload"><code>payload</code></a></li>
+<li><a href="#error"><code>error</code></a></li>
+<li><a href="#meta"><code>meta</code></a></li>
+</ul>
+</li>
+</ul>
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+<h3>Redux Standard API-calling Actions</h3>
+<p>The definition of a <em>Redux Standard API-calling Action</em> below is the one used to validate RSAA actions. As explained in <a href="USAGE.md#lifecycle">Lifecycle</a>,</p>
+<ul>
+<li>actions without an <code>[RSAA]</code> property will be passed to the next middleware without any modifications;</li>
+<li>actions with an <code>[RSAA]</code> property that fail validation will result in an error <em>request</em> FSA.</li>
+</ul>
+<p>A <em>Redux Standard API-calling Action</em> MUST</p>
+<ul>
+<li>be a plain JavaScript object,</li>
+<li>have an <code>[RSAA]</code> property.</li>
+</ul>
+<p>A <em>Redux Standard API-calling Action</em> MUST NOT</p>
+<ul>
+<li>include properties other than <code>[RSAA]</code>.</li>
+</ul>
+<h4><code>[RSAA]</code></h4>
+<p>The <code>[RSAA]</code> property MUST</p>
+<ul>
+<li>be a plain JavaScript Object,</li>
+<li>have an <code>endpoint</code> property,</li>
+<li>have a <code>method</code> property,</li>
+<li>have a <code>types</code> property.</li>
+</ul>
+<p>The <code>[RSAA]</code> property MAY</p>
+<ul>
+<li>have a <code>body</code> property,</li>
+<li>have a <code>headers</code> property,</li>
+<li>have a <code>credentials</code> property,</li>
+<li>have a <code>bailout</code> property.</li>
+</ul>
+<p>The <code>[RSAA]</code> property MUST NOT</p>
+<ul>
+<li>include properties other than <code>endpoint</code>, <code>method</code>, <code>types</code>, <code>body</code>, <code>headers</code>, <code>credentials</code>, and <code>bailout</code>.</li>
+</ul>
+<h4><code>[RSAA].endpoint</code></h4>
+<p>The <code>[RSAA].endpoint</code> property MUST be a string or a function. In the second case, the function SHOULD return a string.</p>
+<h4><code>[RSAA].method</code></h4>
+<p>The <code>[RSAA].method</code> property MUST be one of the strings <code>GET</code>, <code>HEAD</code>, <code>POST</code>, <code>PUT</code>, <code>PATCH</code>, <code>DELETE</code> or <code>OPTIONS</code>, in any mixture of lowercase and uppercase letters.</p>
+<h4><code>[RSAA].body</code></h4>
+<p>The optional <code>[RSAA].body</code> property SHOULD be a valid body according to the the <a href="https://fetch.spec.whatwg.org">fetch specification</a>.</p>
+<h4><code>[RSAA].headers</code></h4>
+<p>The optional <code>[RSAA].headers</code> property MUST be a plain JavaScript object or a function. In the second case, the function SHOULD return a plain JavaScript object.</p>
+<h4><code>[RSAA].credentials</code></h4>
+<p>The optional <code>[RSAA].credentials</code> property MUST be one of the strings <code>omit</code>, <code>same-origin</code> or <code>include</code>.</p>
+<h4><code>[RSAA].bailout</code></h4>
+<p>The optional <code>[RSAA].bailout</code> property MUST be a boolean or a function.</p>
+<h4><code>[RSAA].types</code></h4>
+<p>The <code>[RSAA].types</code> property MUST be an array of length 3. Each element of the array MUST be a string, a <code>Symbol</code>, or a type descriptor.</p>
+<h4>Type descriptors</h4>
+<p>A type descriptor MUST</p>
+<ul>
+<li>be a plain JavaScript object,</li>
+<li>have a <code>type</code> property, which MUST be a string or a <code>Symbol</code>.</li>
+</ul>
+<p>A type descriptor MAY</p>
+<ul>
+<li>have a <code>payload</code> property, which MAY be of any type,</li>
+<li>have a <code>meta</code> property, which MAY be of any type.</li>
+</ul>
+<p>A type descriptor MUST NOT</p>
+<ul>
+<li>have properties other than <code>type</code>, <code>payload</code> and <code>meta</code>.</li>
+</ul>
+<h3>Flux Standard Actions</h3>
+<p>For convenience, we recall here the definition of a <a href="https://github.com/acdlite/flux-standard-action"><em>Flux Standard Action</em></a>.</p>
+<p>An action MUST</p>
+<ul>
+<li>be a plain JavaScript object,</li>
+<li>have a <code>type</code> property.</li>
+</ul>
+<p>An action MAY</p>
+<ul>
+<li>have an <code>error</code> property,</li>
+<li>have a <code>payload</code> property,</li>
+<li>have a <code>meta</code> property.</li>
+</ul>
+<p>An action MUST NOT</p>
+<ul>
+<li>include properties other than <code>type</code>, <code>payload</code>, <code>error</code> and <code>meta</code>.</li>
+</ul>
+<h4><code>type</code></h4>
+<p>The <code>type</code> of an action identifies to the consumer the nature of the action that has occurred. Two actions with the same <code>type</code> MUST be strictly equivalent (using <code>===</code>). By convention, <code>type</code> is usually a string constant or a <code>Symbol</code>.</p>
+<h4><code>payload</code></h4>
+<p>The optional <code>payload</code> property MAY be any type of value. It represents the payload of the action. Any information about the action that is not the <code>type</code> or status of the action should be part of the <code>payload</code> field.</p>
+<p>By convention, if <code>error</code> is true, the <code>payload</code> SHOULD be an error object. This is akin to rejecting a Promise with an error object.</p>
+<h4><code>error</code></h4>
+<p>The optional <code>error</code> property MAY be set to <code>true</code> if the action represents an error.</p>
+<p>An action whose <code>error</code> is true is analogous to a rejected Promise. By convention, the <code>payload</code> SHOULD be an error object.</p>
+<p>If <code>error</code> has any other value besides <code>true</code>, including <code>undefined</code> and <code>null</code>, the action MUST NOT be interpreted as an error.</p>
+<h4><code>meta</code></h4>
+<p>The optional <code>meta</code> property MAY be any type of value. It is intended for any extra information that is not part of the payload.</p>
+
+  
+</section>
+</div>
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='reduxactionhandler'>
+      ReduxActionHandler
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/nason/redux-api-middleware/blob/92462208c7b584be1b7917752b229b8760aaf743/src/index.js#L33-L33'>
+      <span>src/index.js</span>
+      </a>
+    
+  </div>
+  
+
+  
+
+  <div class='pre p1 fill-light mt0'>ReduxActionHandler</div>
+  
+    <p>
+      Type:
+      <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">function</a>
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>store</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>next</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">function</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>action</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>ReduxNextHandler</code>:
+        
+
+      
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="#reduxactionhandler">ReduxActionHandler</a></code>:
+        
+
+      
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>any</code>:
+        undefined
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='redux-api-middleware'>
+      redux-api-middleware
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/nason/redux-api-middleware/blob/92462208c7b584be1b7917752b229b8760aaf743/src/index.js#L33-L33'>
+      <span>src/index.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Redux middleware for calling an API</p>
+
+
+  <div class='pre p1 fill-light mt0'>redux-api-middleware</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='rsaa'>
+      RSAA
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/nason/redux-api-middleware/blob/92462208c7b584be1b7917752b229b8760aaf743/src/RSAA.js#L8-L8'>
+      <span>src/RSAA.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>String key that carries API call info interpreted by this Redux middleware.</p>
+
+
+  <div class='pre p1 fill-light mt0'>RSAA</div>
+  
+    <p>
+      Type:
+      <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='isrsaa'>
+      isRSAA
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/nason/redux-api-middleware/blob/92462208c7b584be1b7917752b229b8760aaf743/src/validation.js#L12-L14'>
+      <span>src/validation.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Is the given action a plain JavaScript object with an [RSAA] property?</p>
+
+
+  <div class='pre p1 fill-light mt0'>isRSAA(action: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>action</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>)</code>
+	    The action to check
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>:
+        
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='validatersaa'>
+      validateRSAA
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/nason/redux-api-middleware/blob/92462208c7b584be1b7917752b229b8760aaf743/src/validation.js#L57-L150'>
+      <span>src/validation.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Checks an action against the RSAA definition, returning a (possibly empty)
+array of validation errors.</p>
+
+
+  <div class='pre p1 fill-light mt0'>validateRSAA(action: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">array</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>action</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>)</code>
+	    The action to check against the RSAA definition
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">array</a></code>:
+        
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='isvalidrsaa'>
+      isValidRSAA
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/nason/redux-api-middleware/blob/92462208c7b584be1b7917752b229b8760aaf743/src/validation.js#L160-L162'>
+      <span>src/validation.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Is the given action a valid RSAA?</p>
+
+
+  <div class='pre p1 fill-light mt0'>isValidRSAA(action: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>action</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>)</code>
+	    The action to check against the RSAA definition
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>:
+        
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='invalidrsaa'>
+      InvalidRSAA
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/nason/redux-api-middleware/blob/92462208c7b584be1b7917752b229b8760aaf743/src/errors.js#L8-L15'>
+      <span>src/errors.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Error class for an RSAA that does not conform to the RSAA definition</p>
+
+
+  <div class='pre p1 fill-light mt0'>new InvalidRSAA(validationErrors: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">array</a>)</div>
+  
+  
+    <p>
+      Extends
+      
+        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a>
+      
+    </p>
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>validationErrors</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">array</a>)</code>
+	    an array of validation errors
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='internalerror'>
+      InternalError
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/nason/redux-api-middleware/blob/92462208c7b584be1b7917752b229b8760aaf743/src/errors.js#L24-L30'>
+      <span>src/errors.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Error class for a custom <code>payload</code> or <code>meta</code> function throwing</p>
+
+
+  <div class='pre p1 fill-light mt0'>new InternalError(message: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</div>
+  
+  
+    <p>
+      Extends
+      
+        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a>
+      
+    </p>
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>message</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    the error message
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='requesterror'>
+      RequestError
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/nason/redux-api-middleware/blob/92462208c7b584be1b7917752b229b8760aaf743/src/errors.js#L39-L45'>
+      <span>src/errors.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Error class for an error raised trying to make an API call</p>
+
+
+  <div class='pre p1 fill-light mt0'>new RequestError(message: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</div>
+  
+  
+    <p>
+      Extends
+      
+        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a>
+      
+    </p>
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>message</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    the error message
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='apierror'>
+      ApiError
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/nason/redux-api-middleware/blob/92462208c7b584be1b7917752b229b8760aaf743/src/errors.js#L57-L66'>
+      <span>src/errors.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Error class for an API response outside the 200 range</p>
+
+
+  <div class='pre p1 fill-light mt0'>new ApiError(status: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, statusText: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, response: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>)</div>
+  
+  
+    <p>
+      Extends
+      
+        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a>
+      
+    </p>
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>status</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+	    the status code of the API response
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>statusText</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    the status text of the API response
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>response</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>)</code>
+	    the parsed JSON response of the API server if the
+'Content-Type' header signals a JSON response
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='getjson'>
+      getJSON
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/nason/redux-api-middleware/blob/92462208c7b584be1b7917752b229b8760aaf743/src/util.js#L11-L20'>
+      <span>src/util.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Extract JSON body from a server response</p>
+
+
+  <div class='pre p1 fill-light mt0'>getJSON(res: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>): (<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">promise</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined">undefined</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>res</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>)</code>
+	    A raw response object
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">promise</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined">undefined</a>)</code>:
+        
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='apimiddleware'>
+      apiMiddleware
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/nason/redux-api-middleware/blob/92462208c7b584be1b7917752b229b8760aaf743/src/middleware.js#L17-L134'>
+      <span>src/middleware.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>A Redux middleware that processes RSAA actions.</p>
+
+
+  <div class='pre p1 fill-light mt0'>apiMiddleware(config: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">function</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>config</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>)</code>
+	    
+          </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+                  <td class='break-word'><span class='code bold'>config.getState</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">function</a></code>
+                  </td>
+                  <td class='break-word'><span></span></td>
+                </tr>
+              
+            </tbody>
+          </table>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">function</a></code>:
+        
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+      </div>
+    </div>
+  </div>
+  <script src='assets/anchor.js'></script>
+  <script src='assets/site.js'></script>
+</body>
+</html>

@@ -10,7 +10,7 @@ import {
   InvalidRSAA, InternalError, RequestError, ApiError,
   getJSON,
   apiMiddleware
-} from '../src';
+} from '../src/index';
 
 // Private module exports
 import { isValidTypeDescriptor } from '../src/validation';

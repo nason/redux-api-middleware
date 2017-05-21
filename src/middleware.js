@@ -9,6 +9,9 @@ import { getJSON, normalizeTypeDescriptors, actionWith } from './util';
  * A Redux middleware that processes RSAA actions.
  *
  * @type {ReduxMiddleware}
+ * @param {object} config
+ * @param {function} config.getState
+ * @returns {function}
  * @access public
  */
 function apiMiddleware({ getState }) {
